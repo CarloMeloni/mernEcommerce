@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
+//ROUTES
+const userRoutes = require('./routes/user');
 
 //APP
 const app = express();
@@ -11,10 +13,8 @@ mongoose.connect(process.env.DATABASE, {
     useCreateIndex: true
 }).then(() => { console.log('DATABASE CONNECTED!') });
 
-//ROUTES
-app.get('/', (req, res) => {
-    res.send('Server working outdatedddd!!!')
-});
+//ROUTES MIDDLEWARE
+app.use('/api', userRoutes);
 
 const port = process.env.PORT || 8000;
 
